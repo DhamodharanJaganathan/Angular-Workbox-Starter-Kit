@@ -1,3 +1,3 @@
 # Angular Workbox Starter Kit
 
-# Project Name : MyAPP
+# Project Name : MyApp
