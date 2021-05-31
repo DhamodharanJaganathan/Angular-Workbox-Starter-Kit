@@ -16,7 +16,8 @@ declare const self: any;
 const componentName = "Service Worker";
 
 // Enable debug mode during development
-const DEBUG_MODE = location.hostname.endsWith(".app.local") || location.hostname === "localhost";
+// const DEBUG_MODE = location.hostname.endsWith(".app.local") || location.hostname === "localhost";
+const DEBUG_MODE = true;
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
 const MONTH_IN_SECONDS = DAY_IN_SECONDS * 30;
