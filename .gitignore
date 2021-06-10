@@ -1,5 +1,6 @@
 .DS_STORE
 
+/dist/
 /bazel-out
 /integration/bazel/bazel-*
 *.log
@@ -54,6 +55,3 @@ tools/gulp-tasks/cldr/cldr-data/
 
 # Husky
 .husky/_
-
-# ignore service-worker.js
-src/service-worker.js
