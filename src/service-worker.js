@@ -108,7 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const componentName = "Service Worker";
 // Enable debug mode during development
-const DEBUG_MODE = location.hostname.endsWith(".app.local") || location.hostname === "localhost";
+const DEBUG_MODE = location.hostname === "localhost";
 const DAY_IN_SECONDS = 24 * 60 * 60;
 const MONTH_IN_SECONDS = DAY_IN_SECONDS * 30;
 const YEAR_IN_SECONDS = DAY_IN_SECONDS * 365;
@@ -133,19 +133,23 @@ const assetsToCache = self.__WB_MANIFEST;
 if (DEBUG_MODE) {
     console.trace(`${componentName}:: Assets that will be cached: `, assetsToCache);
 }
-Object(workbox_precaching__WEBPACK_IMPORTED_MODULE_2__["precacheAndRoute"])(assetsToCache);
+if (location.hostname !== "localhost") {
+    Object(workbox_precaching__WEBPACK_IMPORTED_MODULE_2__["precacheAndRoute"])(assetsToCache);
+}
 // ------------------------------------------------------------------------------------------
 // Routes
 // ------------------------------------------------------------------------------------------
 // Default page handler for offline usage,
 // where the browser does not how to handle deep links
 // it's a SPA, so each path that is a navigation should default to index.html
-const defaultRouteHandler = Object(workbox_precaching__WEBPACK_IMPORTED_MODULE_2__["createHandlerBoundToURL"])("/index.html");
-const defaultNavigationRoute = new workbox_routing__WEBPACK_IMPORTED_MODULE_3__["NavigationRoute"](defaultRouteHandler, {
-//allowlist: [],
-//denylist: [],
-});
-Object(workbox_routing__WEBPACK_IMPORTED_MODULE_3__["registerRoute"])(defaultNavigationRoute);
+if (location.hostname !== "localhost") {
+    const defaultRouteHandler = Object(workbox_precaching__WEBPACK_IMPORTED_MODULE_2__["createHandlerBoundToURL"])("/index.html");
+    const defaultNavigationRoute = new workbox_routing__WEBPACK_IMPORTED_MODULE_3__["NavigationRoute"](defaultRouteHandler, {
+    //allowlist: [],
+    //denylist: [],
+    });
+    Object(workbox_routing__WEBPACK_IMPORTED_MODULE_3__["registerRoute"])(defaultNavigationRoute);
+}
 // Cache the Google Fonts stylesheets with a stale while revalidate strategy.
 Object(workbox_routing__WEBPACK_IMPORTED_MODULE_3__["registerRoute"])(/^https:\/\/fonts\.googleapis\.com/, new workbox_strategies__WEBPACK_IMPORTED_MODULE_4__["StaleWhileRevalidate"]({
     cacheName: "google-fonts-stylesheets",

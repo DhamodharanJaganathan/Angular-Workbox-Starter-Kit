@@ -19,7 +19,7 @@ function loadServiceWorker() {
     const wb = new Workbox("service-worker.js");
     wb.addEventListener("activated", async (event) => {
       if (!event.isUpdate) {
-        console.log("Service worker activated for the first time!");
+        console.log("Service worker activated for the first time");
       } else {
         console.log("Service worker activated");
       }

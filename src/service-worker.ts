@@ -16,8 +16,7 @@ declare const self: any;
 const componentName = "Service Worker";
 
 // Enable debug mode during development
-// const DEBUG_MODE = location.hostname.endsWith(".app.local") || location.hostname === "localhost";
-const DEBUG_MODE = true;
+const DEBUG_MODE = location.hostname === "localhost";
 
 const DAY_IN_SECONDS = 24 * 60 * 60;
 const MONTH_IN_SECONDS = DAY_IN_SECONDS * 30;
@@ -49,7 +48,10 @@ if (DEBUG_MODE) {
   console.trace(`${componentName}:: Assets that will be cached: `, assetsToCache);
 }
 
-precacheAndRoute(assetsToCache);
+if(location.hostname !== "localhost"){
+  precacheAndRoute(assetsToCache);
+}
+
 
 // ------------------------------------------------------------------------------------------
 // Routes
@@ -58,12 +60,16 @@ precacheAndRoute(assetsToCache);
 // Default page handler for offline usage,
 // where the browser does not how to handle deep links
 // it's a SPA, so each path that is a navigation should default to index.html
-const defaultRouteHandler = createHandlerBoundToURL("/index.html");
-const defaultNavigationRoute = new NavigationRoute(defaultRouteHandler, {
-  //allowlist: [],
-  //denylist: [],
-});
-registerRoute(defaultNavigationRoute);
+
+if(location.hostname !== "localhost"){
+  const defaultRouteHandler = createHandlerBoundToURL("/index.html");
+  const defaultNavigationRoute = new NavigationRoute(defaultRouteHandler, {
+    //allowlist: [],
+    //denylist: [],
+  });
+  registerRoute(defaultNavigationRoute);
+}
+
 
 // Cache the Google Fonts stylesheets with a stale while revalidate strategy.
 registerRoute(
