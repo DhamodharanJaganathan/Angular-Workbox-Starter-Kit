@@ -2,7 +2,7 @@
 
 ## Create Angular Project
 
-1. First we can create new Angular Project with Angular-CLI with command: `ng new my-project`
+1. First we can create new Angular Project with Angular-CLI with command: `ng new web`
 
 2. Install dependencies (if not automated) with `npm i` or `yarn install`
 
